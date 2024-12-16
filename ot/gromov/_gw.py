@@ -929,9 +929,9 @@ def solve_gromov_linesearch(
             nx = get_backend(G, deltaG, C1, C2, M)
 
     dot = nx.dot(nx.dot(C1, deltaG), C2.T)
-    a = -reg * nx.sum(dot * deltaG)
+    a = -2*reg * nx.sum(dot * deltaG)
     if symmetric:
-        b = nx.sum(M * deltaG) - 2 * reg * nx.sum(dot * G)
+        b = nx.sum(M * deltaG) - 4 * reg * nx.sum(dot * G)
     else:
         b = nx.sum(M * deltaG) - reg * (
             nx.sum(dot * G) + nx.sum(nx.dot(nx.dot(C1, G), C2.T) * deltaG)
